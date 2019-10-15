@@ -8,29 +8,17 @@ public class CalculatorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIllegalArg() {
-        double number1 = Math.random();
-        double number2 = Math.random();
+        double number1 = 2.1;
+        double number2 = 3.5;
         double expected = number1 + number2;
         double actual = calculator.calculate(number1, number2, '3');
-        Assert.assertEquals(expected, actual, 0);
-        expected = number1 - number2;
-        actual = calculator.calculate(number1, number2, '3');
-        Assert.assertEquals(expected, actual, 0);
-        expected = number1 * number2;
-        actual = calculator.calculate(number1, number2, 'b');
-        Assert.assertEquals(expected, actual, 0);
-        expected = number1 / number2;
-        actual = calculator.calculate(number1, number2, '.');
-        Assert.assertEquals(expected, actual, 0);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '<');
         Assert.assertEquals(expected, actual, 0);
     }
 
     @Test
     public void checkNotCorrectOperation() {
-        double number1 = Math.random();
-        double number2 = Math.random();
+        double number1 = 3.5;
+        double number2 = 5.1;
         double expected = number1 * number2;
         double actual = calculator.calculate(number1, number2, '/');
         Assert.assertNotEquals(expected, actual);
@@ -76,9 +64,9 @@ public class CalculatorTest {
     }
 
     @Test
-    public void checkCorrect() {
-        double number1 = Math.random();
-        double number2 = Math.random();
+    public void checkCorrectPositive() {
+        double number1 = 3.5;
+        double number2 = 5.1;
         double expected = number1 + number2;
         double actual = calculator.calculate(number1, number2, '+');
         Assert.assertEquals(actual, expected, 0);
@@ -94,10 +82,14 @@ public class CalculatorTest {
         expected = Math.pow(number1, number2);
         actual = calculator.calculate(number1, number2, '^');
         Assert.assertEquals(actual, expected, 0);
-        number1 = -Math.random();
-        number2 = -Math.random();
-        expected = number1 + number2;
-        actual = calculator.calculate(number1, number2, '+');
+    }
+
+    @Test
+    public void checkCorrectNegative() {
+        double number1 = -Math.random();
+        double number2 = -Math.random();
+        double expected = number1 + number2;
+        double actual = calculator.calculate(number1, number2, '+');
         Assert.assertEquals(actual, expected, 0);
         expected = number1 - number2;
         actual = calculator.calculate(number1, number2, '-');
@@ -115,7 +107,7 @@ public class CalculatorTest {
 
     @Test
     public void checkOperationWithZero() {
-        double number1 = Math.random();
+        double number1 = 5.1;
         double number2 = 0;
         double expected = number1 + number2;
         double actual = calculator.calculate(number1, number2, '+');
@@ -134,10 +126,18 @@ public class CalculatorTest {
         Assert.assertEquals(actual, expected, 0);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void CheckNullPointer() {
-        Double number1 = null;
-        Double number2 = null;
 
+        Double number1 = 1.0/0;
+        Double number2 = null;
+        Double expected = Math.pow(number1, number2);
+        Double actual = calculator.calculate(number1, number2, '^');
+        Assert.assertEquals(actual, expected, 0);
+        number1 = null;
+        number2 = 1.1;
+        expected = Math.pow(number1, number2);
+        actual = calculator.calculate(number1, number2, '^');
+        Assert.assertEquals(actual, expected, 0);
     }
 }
