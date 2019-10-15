@@ -1,10 +1,15 @@
 package core.basesyntax;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CalculatorTest {
-    private Calculator calculator = new Calculator();
+    Calculator calculator = null;
+    @Before
+    public void beforeMethod() {
+        calculator = new Calculator();
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkIllegalArg() {
@@ -13,54 +18,6 @@ public class CalculatorTest {
         double expected = number1 + number2;
         double actual = calculator.calculate(number1, number2, '3');
         Assert.assertEquals(expected, actual, 0);
-    }
-
-    @Test
-    public void checkNotCorrectOperation() {
-        double number1 = 3.5;
-        double number2 = 5.1;
-        double expected = number1 * number2;
-        double actual = calculator.calculate(number1, number2, '/');
-        Assert.assertNotEquals(expected, actual);
-        expected = number1 + number2;
-        actual = calculator.calculate(number1, number2, '*');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 + number2;
-        actual = calculator.calculate(number1, number2, '/');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 + number2;
-        actual = calculator.calculate(number1, number2, '-');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 / number2;
-        actual = calculator.calculate(number1, number2, '*');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 - number2;
-        actual = calculator.calculate(number1, number2, '*');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 - number2;
-        actual = calculator.calculate(number1, number2, '/');
-        Assert.assertNotEquals(actual, expected);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '/');
-        Assert.assertNotEquals(actual, expected);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '/');
-        Assert.assertNotEquals(actual, expected);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '*');
-        Assert.assertNotEquals(actual, expected);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '+');
-        Assert.assertNotEquals(actual, expected);
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '-');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 - number2;
-        actual = calculator.calculate(number1, number2, '^');
-        Assert.assertNotEquals(actual, expected);
-        expected = number1 + number2;
-        actual = calculator.calculate(number1, number2, '^');
-        Assert.assertNotEquals(actual, expected);
     }
 
     @Test
@@ -128,16 +85,8 @@ public class CalculatorTest {
 
     @Test(expected = NullPointerException.class)
     public void CheckNullPointer() {
-
-        Double number1 = 1.0/0;
+        Double number1 = 1.0;
         Double number2 = null;
-        Double expected = Math.pow(number1, number2);
         Double actual = calculator.calculate(number1, number2, '^');
-        Assert.assertEquals(actual, expected, 0);
-        number1 = null;
-        number2 = 1.1;
-        expected = Math.pow(number1, number2);
-        actual = calculator.calculate(number1, number2, '^');
-        Assert.assertEquals(actual, expected, 0);
     }
 }
