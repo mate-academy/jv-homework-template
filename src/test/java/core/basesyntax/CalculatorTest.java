@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CalculatorTest {
-    Calculator calculator = null;
+    private Calculator calculator = null;
     @Before
     public void beforeMethod() {
         calculator = new Calculator();
@@ -43,8 +43,8 @@ public class CalculatorTest {
 
     @Test
     public void checkCorrectNegative() {
-        double number1 = -Math.random();
-        double number2 = -Math.random();
+        double number1 = -2.5;
+        double number2 = -3.1;
         double expected = number1 + number2;
         double actual = calculator.calculate(number1, number2, '+');
         Assert.assertEquals(actual, expected, 0);
